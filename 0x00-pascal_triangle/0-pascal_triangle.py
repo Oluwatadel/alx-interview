@@ -1,29 +1,25 @@
 #!/usr/bin/python3
-
 """
-Calculates integers representing the Pascal's triangle of n
-
-Args:
-    n (int): number of lines in a Pascal's triangle
-    
-Returns:
-    list: a list of lists of integers representing the Pascal’s triangle of n
+Pascal Trangle
 """
 
 
 def pascal_triangle(n):
-    """
-    Calculate pascal triangle
-    """
-    triangle = []
+    '''
+    Creates a list of lists of integers in a Pascal's triangle
+    of a given integer.
+    '''
     if n <= 0:
-        return triangle
+        return []
     else:
-        for i in range(1, n+1):
-            C = 1
-            tmp = []
-            for j in range(1, i+1):
-                tmp.append(C)
-                C = C * (i - j) // j
-            triangle.append(tmp)
-    return triangle
+        res = []
+        for i in range(n):
+            if len(res) == 0:
+                res.append([1])
+            else:
+                row = [1]
+                for j in range(1, len(res[-1])):
+                    row.append(res[-1][j] + res[-1][j - 1])
+                row.append(1)
+                res.append(row)
+        return res
